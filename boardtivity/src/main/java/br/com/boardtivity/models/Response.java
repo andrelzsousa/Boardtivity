@@ -1,4 +1,4 @@
-package model;
+package br.com.boardtivity.models;
 import java.util.List;
 
 public class Response {

@@ -1,4 +1,4 @@
-package model;
+package br.com.boardtivity.models;
 
 public class CreatedBy {
     private String id;

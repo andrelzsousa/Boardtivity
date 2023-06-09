@@ -1,4 +1,4 @@
-package model;
+package br.com.boardtivity.models;
 
 public class ModifiedBy {
     private String id;

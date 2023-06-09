@@ -1,4 +1,4 @@
-package br.com.boardtivity;
+package br.com.boardtivity.service;
 
 import java.util.List;
 
@@ -9,17 +9,17 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import com.google.gson.Gson;
 
-import model.CreatedBy;
-import model.Data;
-import model.Item;
-import model.ModifiedBy;
-import model.Response;
-import model.Style;
+import br.com.boardtivity.models.CreatedBy;
+import br.com.boardtivity.models.Data;
+import br.com.boardtivity.models.Item;
+import br.com.boardtivity.models.ModifiedBy;
+import br.com.boardtivity.models.Response;
+import br.com.boardtivity.models.Style;
 
 public class App {
 	public static void main(String[] args) {
 		String url = "https://api.miro.com/v2/boards/uXjVOzzQtpM%3D/items";
-		String authorization = "Bearer eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_CV4w71U45oRS1Y-v7CQTqwkGx_o";
+		String authorization = "Bearer eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_4soptbPPlNzvIeEEuss2JyYlU0A";
 		
 		try {
 			CloseableHttpClient client = HttpClientBuilder.create().build();
