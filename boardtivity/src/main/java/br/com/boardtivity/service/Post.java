@@ -18,9 +18,20 @@ import br.com.boardtivity.models.Response;
 import br.com.boardtivity.models.Style;
 
 public class Post {
-    public static void main(String[] args) {
-        String url = "https://api.miro.com/v2/boards/uXjVOzzQtpM%3D/sticky_notes";
-        String authorization = "Bearer eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_5gcEyoUNaNurlc4pFADytS2wc0I";
+	String token;
+	String idBoard;
+	
+	
+    public Post(String token, String idBoard) {
+		super();
+		this.token = token;
+		this.idBoard = idBoard;
+	}
+
+	public String gerarPontoConvergencia(String conteudo, String cor, String posX, String posY) {
+    	
+        String url = "https://api.miro.com/v2/boards/"+ idBoard +"/sticky_notes";
+        String authorization = "Bearer " + token;
         
         try {
             CloseableHttpClient client = HttpClientBuilder.create().build();
@@ -30,13 +41,13 @@ public class Post {
             request.setHeader("Accept", "application/json");
             request.setHeader("Content-type", "application/json");
             request.setHeader("Authorization", authorization);
-            String jsonInputString = "{\"data\":{\"shape\":\"square\",\"content\":\"careca\"},\"position\":{\"origin\":\"center\",\"x\":0,\"y\":30}}";
+            String jsonInputString = "{\"data\":{\"shape\":\"square\",\"content\":\""+ conteudo +"\"},\"style\":{\"fillColor\":\""+ cor +"\"},\"position\":{\"origin\":\"center\",\"x\":"+ posX +",\"y\":"+ posY +"}}";
             request.setEntity(new StringEntity(jsonInputString));
             
             //Fazendo requisição para API do Miro
             CloseableHttpResponse response = client.execute(request);
             String json = EntityUtils.toString(response.getEntity());
-            System.out.println(json);
+            return json;
             
             //Tratando os dados recebidos do JSON
             //Gson gson = new Gson();
@@ -45,7 +56,7 @@ public class Post {
             //Aqui você pode continuar a processar a resposta conforme necessário...
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 }
