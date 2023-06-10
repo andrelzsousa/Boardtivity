@@ -16,10 +16,10 @@ import br.com.boardtivity.models.ModifiedBy;
 import br.com.boardtivity.models.Response;
 import br.com.boardtivity.models.Style;
 
-public class App {
+public class Get {
 	public static void main(String[] args) {
 		String url = "https://api.miro.com/v2/boards/uXjVOzzQtpM%3D/items";
-		String authorization = "Bearer eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_4soptbPPlNzvIeEEuss2JyYlU0A";
+		String authorization = "Bearer eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_5gcEyoUNaNurlc4pFADytS2wc0I";
 		
 		try {
 			CloseableHttpClient client = HttpClientBuilder.create().build();
