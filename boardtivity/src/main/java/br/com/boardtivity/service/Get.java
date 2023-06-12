@@ -19,7 +19,7 @@ import br.com.boardtivity.models.Style;
 public class Get {
 	public static void main(String[] args) {
 		String url = "https://api.miro.com/v2/boards/uXjVOzzQtpM%3D/items";
-		String authorization = "Bearer eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_5gcEyoUNaNurlc4pFADytS2wc0I";
+		String authorization = "Bearer eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_oWiVydDnZGOvhnkvcfbZKMIrLjc";
 		
 		try {
 			CloseableHttpClient client = HttpClientBuilder.create().build();
