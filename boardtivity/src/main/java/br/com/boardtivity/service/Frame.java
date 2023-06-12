@@ -6,38 +6,30 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class ProgramaPost {
-
-    public static void main(String[] args) throws InterruptedException {
-        String token = "eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_dqbgV9DmYc_iVwqR-1q_gl6daIo";
-        String idBoard = "uXjVOzzQtpM=";
-
-        Post envio = new Post(token, idBoard);
-        
-        //pergunta
-//        envio.gerarStickerNote("Pergunta", "red", "-255", "0");
-//
-//        List<String> listaDeA = Arrays.asList("repostas 1", "repostas 2", "resposta 3");
-//        StrateegiaData a = new StrateegiaData("a", "COMENTARIO", listaDeA);
-//
-//        List<String> listaDeB = Arrays.asList("repostas w", "repostas x", "resposta y", "resposta z");
-//        StrateegiaData b = new StrateegiaData("a", "COMENTARIO", listaDeB);
-        
-        
-        
-        
-        
+public class Frame {
+	private static int numeroInstancias = 0;
+	
+    public static int gerarFrame(String tituloFrame, Post envio, String arquivo, int posicao){
+    	numeroInstancias++;
+        //Post envio = new Post(token, idBoard);
+       
         try {
-        	List<StrateegiaData> listaDeComentarios = StrateegiaData.loadDataFromFile("C:\\Users\\andre\\Desktop\\data.txt");
+        	List<StrateegiaData> listaDeComentarios = StrateegiaData.loadDataFromFile("C:\\Users\\andre\\Desktop\\"+ arquivo +"");
 
         	
         	int i = 0;
             int j = 0;
             int k = 0;
-            int posY = 0;
+            int posY = posicao;
             int posX = 0;
             int posYFrame = 0;
             int posXFrame = 0;
+            
+            if(numeroInstancias == 1) {
+            	posYFrame = 0 ;
+                posXFrame = 0;
+            }
+            
             
             int largura = 300;
             int altura = 200;
@@ -46,7 +38,7 @@ public class ProgramaPost {
            
             	
             String questao = listaDeComentarios.get(0).getQuestao();
-            envio.gerarStickerNote(questao, "red", "-255", "0");
+            envio.gerarStickerNote(questao, "red", "-255", Integer.toString(posicao));
             
          
             int maior = listaDeComentarios.get(0).getRepostas().size();
@@ -56,7 +48,7 @@ public class ProgramaPost {
             	if(questao != listaDeComentarios.get(j).getQuestao()) {
             		posX = posX + 255;
             		largura = largura + 255;
-            		envio.gerarStickerNote(listaDeComentarios.get(j).getQuestao(), "red", Integer.toString(posX), "0");
+            		envio.gerarStickerNote(listaDeComentarios.get(j).getQuestao(), "red", Integer.toString(posX), Integer.toString(posicao));
             		questao = listaDeComentarios.get(j).getQuestao();
             		posX = posX + 255;
             		largura = largura + 255;
@@ -90,20 +82,30 @@ public class ProgramaPost {
                 posX = posX + 255;
                 largura = largura + 255;
                 
-                posY = 0;
+                posY = posicao;
                 j++;
                 i = 0;
             }
             
             altura = altura + ((maior + 1) * 255);
             
-            posXFrame = (largura - 500 - 300)/2;
-            posYFrame = (altura - 255 - 200)/2;
-            envio.gerarFrame("Fale sobre você", Integer.toString(posXFrame), Integer.toString(posYFrame), Integer.toString(altura), Integer.toString(largura));
-
+            if(numeroInstancias == 1) {
+            	posXFrame = (largura - 500 - 300)/2;
+                posYFrame = (altura - 255 - 200)/2;
+            }
+            else {
+            	posXFrame = (largura - 500 - 300)/2;
+            	posYFrame = posicao + 250;
+            }
+            System.out.println(numeroInstancias);
+            
+            String retorno = envio.gerarBackground(tituloFrame, Integer.toString(posXFrame), Integer.toString(posYFrame), Integer.toString(altura), Integer.toString(largura));
+            System.out.println(retorno);
+            return altura;
             
         } catch (IOException e) {
         	e.printStackTrace();
+        	return 0;
         }
         
 
