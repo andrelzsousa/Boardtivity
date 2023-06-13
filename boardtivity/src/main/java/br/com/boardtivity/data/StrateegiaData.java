@@ -9,8 +9,6 @@ public class StrateegiaData {
     private String comentario;
     private List<String> repostas;
 
-    
-
     public String getQuestao() {
 		return questao;
 	}
@@ -46,7 +44,7 @@ public class StrateegiaData {
         super();
     }
 
-	public static List<StrateegiaData> loadDataFromFile(String filename) throws IOException {
+	public static List<StrateegiaData> lerDadosTxt(String filename) throws IOException {
 	    List<StrateegiaData> dataList = new ArrayList<>();
 	    BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filename), StandardCharsets.UTF_8));
 	    String line;
@@ -89,7 +87,7 @@ public class StrateegiaData {
 
     public static void main(String[] args) {
         try {
-            List<StrateegiaData> dataList = loadDataFromFile("C:\\Users\\andre\\Desktop\\data.txt");
+            List<StrateegiaData> dataList = lerDadosTxt("C:\\Users\\andre\\Desktop\\data.txt");
             for (StrateegiaData data : dataList) {
                 System.out.println(data);
             }

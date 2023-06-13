@@ -14,18 +14,16 @@ import br.com.boardtivity.models.CreatedBy;
 import br.com.boardtivity.models.Data;
 import br.com.boardtivity.models.Item;
 import br.com.boardtivity.models.ModifiedBy;
+import br.com.boardtivity.models.Quadro;
 import br.com.boardtivity.models.Response;
 import br.com.boardtivity.models.Style;
 
-public class Post {
-    private String token;
-    private String idBoard;
+public class Post extends Quadro{
 
     private static Post instance;
 
     private Post(String token, String idBoard) {
-        this.token = token;
-        this.idBoard = idBoard;
+        super(token, idBoard);
     }
 
     public static Post getInstance(String token, String idBoard) {
@@ -36,8 +34,8 @@ public class Post {
     }
 
     public String gerarStickerNote(String conteudo, String cor, String posX, String posY) {
-        String url = "https://api.miro.com/v2/boards/" + idBoard + "/sticky_notes";
-        String authorization = "Bearer " + token;
+        String url = "https://api.miro.com/v2/boards/" + getIdBoard() + "/sticky_notes";
+        String authorization = "Bearer " + getToken();
 
         try {
             CloseableHttpClient client = HttpClientBuilder.create().build();
@@ -65,8 +63,8 @@ public class Post {
         try {
             CloseableHttpClient client = HttpClientBuilder.create().build();
 
-            String url = "https://api.miro.com/v2/boards/" + idBoard + "/frames";
-            String authorization = "Bearer " + token;
+            String url = "https://api.miro.com/v2/boards/" + getIdBoard() + "/frames";
+            String authorization = "Bearer " + getToken();
 
             // Definindo Token, URL do pedido e corpo da solicitação
             HttpPost request = new HttpPost(url);
@@ -74,7 +72,8 @@ public class Post {
             request.setHeader("Content-type", "application/json");
             request.setHeader("Authorization", authorization);
             String jsonInputString = "{\"data\":{\"format\":\"custom\",\"title\":\"" + titulo
-                    + "\",\"type\":\"freeform\",\"showContent\":true},\"style\":{\"fillColor\":\"#E4C891\"},\"position\":{\"origin\":\"center\",\"x\":"
+                    + "\",\"type\":\"freeform\",\"showContent\":true},"
+                    + "\"style\":{\"fillColor\":\"#E4C891\"},\"position\":{\"origin\":\"center\",\"x\":"
                     + posX + ",\"y\":" + posY + "},\"geometry\":{\"height\":" + altura + ",\"width\":" + largura + "}}";
             request.setEntity(new StringEntity(jsonInputString, "UTF-8"));
 

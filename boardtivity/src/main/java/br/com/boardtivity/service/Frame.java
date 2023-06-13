@@ -17,7 +17,7 @@ public class Frame {
         	//List<StrateegiaData> listaDeComentarios = StrateegiaData.loadDataFromFile("C:\\Users\\andre\\Desktop\\"+ arquivo +"");
         	///boardtivity/src/main/java/br/com/boardtivity/data/data.txt
         	String caminhoDoArquivo = System.getProperty("user.dir") + "\\src\\main\\java\\br\\com\\boardtivity\\data\\" + arquivo;
-        	List<StrateegiaData> listaDeComentarios = StrateegiaData.loadDataFromFile(caminhoDoArquivo);
+        	List<StrateegiaData> listaDeComentarios = StrateegiaData.lerDadosTxt(caminhoDoArquivo);
         	
         	int i = 0;
             int j = 0;
@@ -39,8 +39,6 @@ public class Frame {
             int altura = 200;
             
             String cor;
-           
-            	
             String questao = listaDeComentarios.get(0).getQuestao();
             envio.gerarStickerNote(questao, "red", "-255", Integer.toString(posY));
             
